@@ -1,6 +1,5 @@
 package com.payjinn.app.restapi;
 
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpMethod;
@@ -11,7 +10,6 @@ import org.springframework.web.client.RestTemplate;
 import com.google.gson.Gson;
 import com.payjinn.app.model.InitiatePayment;
 import com.payjinn.app.model.PaymentResource;
-import com.payjinn.app.model.TransactionCode;
 import com.payjinn.app.model.TransferAmount;
 import org.slf4j.*;
 
@@ -41,19 +39,10 @@ public class PayjinnClient {
     }
 
     public PaymentResource post(){
-        InitiatePayment ip = new InitiatePayment("10",
-                new TransferAmount("100","100"),
-                "",
-                "",
-                "",
-                "",
-                "en",
-                "100",
-                new TransactionCode(new Object(), 0),
-                "10");
-        String res = new Gson().toJson(ip).replace("TransferAmountObject", "transferAmount").replace("TransactionCodeObject", "transactionCode");
-        log.info(res);
-        HttpEntity<String> reqEntity = new HttpEntity<>(res, headers);
+    	
+        InitiatePayment ip = new InitiatePayment("10", new TransferAmount("100","EUR"), "", "", "", "", "", "PAYJINN", 0, "10");
+        HttpEntity<String> reqEntity = new HttpEntity<>(new Gson().toJson(ip), headers);
+        
         try{
             ResponseEntity<PaymentResource> resEntity = restTemplate.exchange(server + "/payments",
                     HttpMethod.POST,
@@ -64,6 +53,7 @@ public class PayjinnClient {
         }
         catch (Exception e){
             e.printStackTrace();
+            this.setStatus(HttpStatus.INTERNAL_SERVER_ERROR);
             return null;
         }
     }

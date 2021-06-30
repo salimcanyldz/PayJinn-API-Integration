@@ -3,14 +3,14 @@ package com.payjinn.app.model;
 public class InitiatePayment {
 
 	private String clientOrderCode;
-    TransferAmount TransferAmountObject;
+    private TransferAmount transferAmount;
     private String clientNotificationURL;
     private String clientSuccessURL;
     private String clientOnPaymentReceivedURL;
     private String baseAccountIBAN;
     private String languageCode;
     private String paymentCode;
-    TransactionCode TransactionCodeObject;
+    private int transactionCode;
     private String bookingId;
 
     public InitiatePayment(String clientOrderCode,
@@ -21,18 +21,18 @@ public class InitiatePayment {
                            String baseAccountIBAN,
                            String languageCode,
                            String paymentCode,
-                           TransactionCode transactionCodeObject,
+                           int transactionCodeObject,
                            String bookingId) {
 
         this.clientOrderCode = clientOrderCode;
-        TransferAmountObject = transferAmountObject;
+        transferAmount = transferAmountObject;
         this.clientNotificationURL = clientNotificationURL;
         this.clientSuccessURL = clientSuccessURL;
         this.clientOnPaymentReceivedURL = clientOnPaymentReceivedURL;
         this.baseAccountIBAN = baseAccountIBAN;
         this.languageCode = languageCode;
         this.paymentCode = paymentCode;
-        TransactionCodeObject = transactionCodeObject;
+        transactionCode = transactionCodeObject;
         this.bookingId = bookingId;
     }
 
@@ -40,8 +40,8 @@ public class InitiatePayment {
         return clientOrderCode;
     }
 
-    public TransferAmount getTransferAmountObject() {
-        return TransferAmountObject;
+    public TransferAmount getTransferAmount() {
+        return transferAmount;
     }
 
     public String getClientNotificationURL() {
@@ -68,8 +68,8 @@ public class InitiatePayment {
         return paymentCode;
     }
 
-    public TransactionCode getTransactionCodeObject() {
-        return TransactionCodeObject;
+    public int getTransactionCode() {
+        return transactionCode;
     }
 
     public String getBookingId() {
