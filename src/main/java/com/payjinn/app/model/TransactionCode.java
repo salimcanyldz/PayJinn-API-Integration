@@ -1,15 +1,19 @@
 package com.payjinn.app.model;
 
 public class TransactionCode {
-	
-	private String sales;
-	private String value;
-	
-	public String getSales() {
-		return sales;
-	}
+    private Object Sales;
+    private String value;
 
-	public String getValue() {
-		return value;
-	}
+    public TransactionCode(Object Sales,float value) {
+        this.Sales = Sales;
+        this.value = String.valueOf(value);
+    }
+
+    public Object getSales() {
+        return Sales;
+    }
+
+    public String getValue() {
+        return value;
+    }
 }
