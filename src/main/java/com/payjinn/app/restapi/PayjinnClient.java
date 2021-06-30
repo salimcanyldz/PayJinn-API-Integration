@@ -10,6 +10,7 @@ import org.springframework.web.client.RestTemplate;
 import com.google.gson.Gson;
 import com.payjinn.app.model.InitiatePayment;
 import com.payjinn.app.model.PaymentResource;
+import com.payjinn.app.model.TransactionDetail;
 import com.payjinn.app.model.TransferAmount;
 import org.slf4j.*;
 
@@ -56,6 +57,28 @@ public class PayjinnClient {
             this.setStatus(HttpStatus.INTERNAL_SERVER_ERROR);
             return null;
         }
+    }
+    
+    public TransactionDetail get(PaymentResource paymentResource) {
+    	
+    	HttpEntity<String> reqEntity = new HttpEntity<>(new Gson().toJson(paymentResource), headers);
+    	try {
+    		
+    		ResponseEntity<TransactionDetail> resEntity = restTemplate.exchange(server + "/payments/{sessionCode}", 
+    				HttpMethod.GET,
+    				reqEntity,
+    				TransactionDetail.class,
+    				paymentResource.getSessionCode());
+    		log.info("after res");
+    		this.setStatus(resEntity.getStatusCode());
+    		
+    		return resEntity.getBody();
+    	}
+    	catch (Exception e) {
+    		e.printStackTrace();
+    		this.setStatus(HttpStatus.INTERNAL_SERVER_ERROR);
+    		return null;
+    	}
     }
 
     public String getServer() {
