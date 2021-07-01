@@ -10,12 +10,10 @@ import com.google.gson.Gson;
 import com.payjinn.app.model.PaymentResource;
 import com.payjinn.app.model.TransactionDetail;
 import com.payjinn.app.restapi.PayjinnClient;
-import org.slf4j.*;
 
 @RestController
 public class PayjinnTaskController {
 
-	Logger log = LoggerFactory.getLogger(PayjinnTaskController.class);
 	
 	@Value("${auth.username}")
 	private String username;

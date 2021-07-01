@@ -12,11 +12,8 @@ import com.payjinn.app.model.InitiatePayment;
 import com.payjinn.app.model.PaymentResource;
 import com.payjinn.app.model.TransactionDetail;
 import com.payjinn.app.model.TransferAmount;
-import org.slf4j.*;
 
 public class PayjinnClient {
-	
-	Logger log = LoggerFactory.getLogger(PayjinnClient.class);
 	
     private String username;
     private String password;
@@ -69,7 +66,6 @@ public class PayjinnClient {
     				reqEntity,
     				TransactionDetail.class,
     				paymentResource.getSessionCode());
-    		log.info("after res");
     		this.setStatus(resEntity.getStatusCode());
     		
     		return resEntity.getBody();
