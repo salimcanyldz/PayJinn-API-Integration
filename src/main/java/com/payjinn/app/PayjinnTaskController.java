@@ -1,6 +1,6 @@
 package com.payjinn.app;
 
-import com.google.gson.Gson;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.payjinn.app.model.PaymentResource;
 import com.payjinn.app.model.TransactionDetail;
 import com.payjinn.app.restapi.PayjinnClient;
@@ -34,7 +34,8 @@ public class PayjinnTaskController {
           return new ResponseEntity<>(
               "Client Connection Failed..", HttpStatus.INTERNAL_SERVER_ERROR);
         }
-        return new ResponseEntity<>(new Gson().toJson(td), HttpStatus.OK);
+
+        return new ResponseEntity<>(new ObjectMapper().writeValueAsString(td), HttpStatus.OK);
       }
     } catch (Exception e) {
       return new ResponseEntity<>("Server Failed..", HttpStatus.INTERNAL_SERVER_ERROR);

@@ -1,6 +1,7 @@
 package com.payjinn.app.restapi;
 
-import com.google.gson.Gson;
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.payjinn.app.model.InitiatePayment;
 import com.payjinn.app.model.PaymentResource;
 import com.payjinn.app.model.TransactionDetail;
@@ -34,12 +35,14 @@ public class PayjinnClient {
     }
   }
 
-  public PaymentResource post() {
+  public PaymentResource post() throws JsonProcessingException {
 
     InitiatePayment ip =
         new InitiatePayment(
             "10", new TransferAmount("100", "EUR"), "", "", "", "", "", "PAYJINN", 0, "10");
-    HttpEntity<String> reqEntity = new HttpEntity<>(new Gson().toJson(ip), headers);
+
+    String jsonFormat = new ObjectMapper().writeValueAsString(ip);
+    HttpEntity<String> reqEntity = new HttpEntity<>(jsonFormat, headers);
 
     try {
       ResponseEntity<PaymentResource> resEntity =
@@ -54,9 +57,10 @@ public class PayjinnClient {
     }
   }
 
-  public TransactionDetail get(PaymentResource paymentResource) {
+  public TransactionDetail get(PaymentResource paymentResource) throws JsonProcessingException {
 
-    HttpEntity<String> reqEntity = new HttpEntity<>(new Gson().toJson(paymentResource), headers);
+    HttpEntity<String> reqEntity =
+        new HttpEntity<>(new ObjectMapper().writeValueAsString(paymentResource), headers);
     try {
 
       ResponseEntity<TransactionDetail> resEntity =
