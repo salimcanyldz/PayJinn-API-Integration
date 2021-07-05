@@ -6,7 +6,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 @SpringBootApplication
 public class PayjinnTaskApplication {
 
-	public static void main(String[] args) {
-		SpringApplication.run(PayjinnTaskApplication.class, args);
-	}
+  public static void main(String[] args) {
+    SpringApplication.run(PayjinnTaskApplication.class, args);
+  }
 }

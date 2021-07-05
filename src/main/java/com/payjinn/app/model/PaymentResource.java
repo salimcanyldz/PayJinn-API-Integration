@@ -1,15 +1,10 @@
 package com.payjinn.app.model;
 
+import lombok.Data;
+
+@Data
 public class PaymentResource {
-	
-    private String paymentURL;
-    private String sessionCode;
 
-    public String getPaymentURL() {
-        return paymentURL;
-    }
-
-    public String getSessionCode() {
-        return sessionCode;
-    }
+  private String paymentURL;
+  private String sessionCode;
 }

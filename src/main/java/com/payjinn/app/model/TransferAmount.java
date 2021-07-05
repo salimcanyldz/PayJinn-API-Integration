@@ -1,23 +1,14 @@
 package com.payjinn.app.model;
 
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+
+@AllArgsConstructor
+@NoArgsConstructor
+@Data
 public class TransferAmount {
-	
-    private String value;
-    private String currency;
 
-    public TransferAmount() {
-	}
-
-	public TransferAmount(String value, String currency) {
-        this.value = value;
-        this.currency = currency;
-    }
-
-    public String getValue() {
-        return value;
-    }
-
-    public String getCurrency() {
-        return currency;
-    }
+  private String value;
+  private String currency;
 }
