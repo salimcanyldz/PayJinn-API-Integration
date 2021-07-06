@@ -1,9 +1,13 @@
 package com.payjinn.app;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.payjinn.app.db.TransactionEntity;
+import com.payjinn.app.db.TransactionRepository;
 import com.payjinn.app.model.PaymentResource;
 import com.payjinn.app.model.TransactionDetail;
 import com.payjinn.app.restapi.PayjinnClient;
+
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -19,6 +23,9 @@ public class PayjinnTaskController {
 
   @Value("${auth.password}")
   private String password;
+  
+  @Autowired
+  private TransactionRepository transactionRepository;
 
   @CrossOrigin
   @GetMapping("/")
@@ -34,8 +41,10 @@ public class PayjinnTaskController {
           return new ResponseEntity<>(
               "Client Connection Failed..", HttpStatus.INTERNAL_SERVER_ERROR);
         }
-
-        return new ResponseEntity<>(new ObjectMapper().writeValueAsString(td), HttpStatus.OK);
+        String transactionJSON= new ObjectMapper().writeValueAsString(td);
+        transactionRepository.save(new TransactionEntity(transactionJSON));
+        transactionRepository.flush();
+        return new ResponseEntity<>(transactionJSON, HttpStatus.OK);
       }
     } catch (Exception e) {
       return new ResponseEntity<>("Server Failed..", HttpStatus.INTERNAL_SERVER_ERROR);
