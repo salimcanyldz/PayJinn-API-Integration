@@ -6,7 +6,6 @@ import com.payjinn.app.db.TransactionRepository;
 import com.payjinn.app.model.PaymentResource;
 import com.payjinn.app.model.TransactionDetail;
 import com.payjinn.app.restapi.PayjinnClient;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpStatus;
@@ -18,14 +17,13 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 public class PayjinnTaskController {
 
-  @Value("${auth.username}")
+  @Value("${spring.security.user.name}")
   private String username;
 
-  @Value("${auth.password}")
+  @Value("${spring.security.user.password}")
   private String password;
-  
-  @Autowired
-  private TransactionRepository transactionRepository;
+
+  @Autowired private TransactionRepository transactionRepository;
 
   @CrossOrigin
   @GetMapping("/")
@@ -41,7 +39,7 @@ public class PayjinnTaskController {
           return new ResponseEntity<>(
               "Client Connection Failed..", HttpStatus.INTERNAL_SERVER_ERROR);
         }
-        String transactionJSON= new ObjectMapper().writeValueAsString(td);
+        String transactionJSON = new ObjectMapper().writeValueAsString(td);
         transactionRepository.save(new TransactionEntity(transactionJSON));
         transactionRepository.flush();
         return new ResponseEntity<>(transactionJSON, HttpStatus.OK);

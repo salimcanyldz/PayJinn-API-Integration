@@ -1,6 +1,7 @@
 plugins {
   id 'org.springframework.boot' version '2.5.2'
   id 'io.spring.dependency-management' version '1.0.11.RELEASE'
+  id 'org.flywaydb.flyway' version '7.11.0'
   id 'com.diffplug.spotless' version '5.11.1'
   id 'java'
 }
@@ -19,6 +20,7 @@ dependencies {
   implementation 'mysql:mysql-connector-java:8.0.25'
   implementation 'org.springframework:spring-jdbc:5.3.8'
   implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
+  implementation 'org.flywaydb:flyway-core'
   compileOnly 'org.projectlombok:lombok:1.18.20'
   annotationProcessor 'org.projectlombok:lombok:1.18.20'
   testImplementation 'org.springframework.boot:spring-boot-starter-test'
@@ -37,7 +39,6 @@ spotless {
     indentWithSpaces(2)
   }
 }
-
 
 test {
   useJUnitPlatform()

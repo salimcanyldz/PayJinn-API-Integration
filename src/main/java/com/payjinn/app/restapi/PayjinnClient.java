@@ -6,6 +6,7 @@ import com.payjinn.app.model.InitiatePayment;
 import com.payjinn.app.model.PaymentResource;
 import com.payjinn.app.model.TransactionDetail;
 import com.payjinn.app.model.TransferAmount;
+import lombok.Data;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpMethod;
@@ -13,6 +14,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.client.RestTemplate;
 
+@Data
 public class PayjinnClient {
 
   private String username;
@@ -78,33 +80,5 @@ public class PayjinnClient {
       this.setStatus(HttpStatus.INTERNAL_SERVER_ERROR);
       return null;
     }
-  }
-
-  public String getServer() {
-    return server;
-  }
-
-  public HttpStatus getStatus() {
-    return status;
-  }
-
-  public void setServer(String server) {
-    this.server = server;
-  }
-
-  public void setStatus(HttpStatus status) {
-    this.status = status;
-  }
-
-  public String getUsername() {
-    return username;
-  }
-
-  public String getPassword() {
-    return password;
-  }
-
-  public HttpHeaders getHeaders() {
-    return headers;
   }
 }
