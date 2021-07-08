@@ -40,7 +40,7 @@ public class PayjinnTaskController {
               "Client Connection Failed..", HttpStatus.INTERNAL_SERVER_ERROR);
         }
         String transactionJSON = new ObjectMapper().writeValueAsString(td);
-        transactionRepository.save(new TransactionEntity(transactionJSON));
+        transactionRepository.save(new TransactionEntity(transactionJSON, td.getBaseAccountHolderName()));
         transactionRepository.flush();
         return new ResponseEntity<>(transactionJSON, HttpStatus.OK);
       }

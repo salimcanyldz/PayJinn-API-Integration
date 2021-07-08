@@ -23,4 +23,8 @@ public class TransactionEntity {
   @Column(name = "details")
   @NonNull
   private String transactionDetails;
+  
+  @Column(name = "user")
+  @NonNull
+  private String accountName;
 }
