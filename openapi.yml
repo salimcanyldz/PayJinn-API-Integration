@@ -1,0 +1,183 @@
+openapi: 3.0.3
+
+info:
+  title: PayJinn API Integration
+  version: 1.0.0
+  description: This API is an automated service of PayJinn payment API.
+
+servers:
+  - url: http://localhost:8080
+
+paths:
+  /:
+    description: Payment Details
+    get:
+      description: Returns payment details of test account.
+      responses:
+        200:
+          description: Operation Successful.
+          content:
+            application/json:
+              schema:
+                title: Payment Details
+                description: Data model describing a payment at PayJinn system
+                type: object
+                properties:
+                    sessionCode:
+                      type: string
+                      example: string
+                    clientId:
+                      type: string
+                      example: string
+                    sessionType:
+                      type: string
+                      example: string
+                    beginDate:
+                      type: string
+                      example: string
+                      format: YYYYMMDD
+                    beginTime:
+                      type: string
+                      example: string
+                      format: HHMMSS
+                    endDate:
+                      type: string
+                      example: string
+                      format: YYYYMMDD
+                    endTime:
+                      type: string
+                      example: string
+                      format: HHMMSS
+                    clientOrderCode:
+                      type: string
+                      example: string
+                    transferAmount:
+                      type: object
+                      title: Amount
+                      properties:
+                        value: 
+                          type: string
+                          example: string
+                          description: Money amount formatted with '.' as currency fragment separator and number of currency fragment digits depending on the currency.
+                        currency: 
+                          type: string
+                          example: string
+                          description: ISO 4217 Currency Code.
+                    baseAccountHolderName:
+                      type: string
+                      example: string
+                    baseCountryCode:
+                      type: string
+                      example: string
+                    baseBLZ:
+                      type: string
+                      example: string
+                    baseBIC:
+                      type: string
+                      example: string
+                    baseIBAN:
+                      type: string
+                      example: string
+                    senderAccountHolderName:
+                      type: string
+                      example: string
+                    senderCountryCode:
+                      type: string
+                      example: string
+                    senderBLZ:
+                      type: string
+                      example: string
+                    senderBIC:
+                      type: string
+                      example: string
+                    senderIBAN:
+                      type: string
+                      example: string
+                    providerCode:
+                      type: string
+                      example: string
+                    providerTransactionId:
+                      type: string
+                      example: string
+                    paymentCode:
+                      type: string
+                      example: string
+                    transactionState:
+                      type: boolean
+                      example: true
+                    tranResult:
+                      type: string
+                      example: string
+                    tranResultInfo:
+                      type: string
+                      example: string
+                    postAuthDate:
+                      type: string
+                      example: string
+                    postAuthTime:
+                      type: string
+                      example: string
+                    voidDate:
+                      type: string
+                      example: string
+                    voidTime:
+                      type: string
+                      example: string
+                    refundCount:
+                      type: integer
+                      example: 0
+                    lastRefundDate:
+                      type: string
+                      example: string
+                    lastRefundTime:
+                      type: string
+                      example: string
+                    refundSum:
+                      title: Amount
+                      properties:
+                        value:
+                          type: string
+                          example: string
+                          description: Money amount formatted with '.' as currency fragment separator and number of currency fragment digits depending on the currency.
+                        currency:
+                          type: string
+                          example: string
+                          description: ISO 4217 Currency Code.
+                    orgSessionCode:
+                      type: string
+                      example: string
+                    paymentReceived:
+                      type: boolean
+                      example: true
+                    paymentReceiveDate:
+                      type: string
+                      example: string
+                      format: YYYYMMDD
+                    paymentReceiveTime:
+                      type: string
+                      example: string
+                      format: HHMMSS
+                    bookingId:
+                      type: string
+                      example: string
+                      description: Id of the booking recorde to which this payment belongs.
+        500:
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                title: Error
+                type: object
+                properties:
+                  errorCode:
+                    description: A numeric code to categorize error
+                    type: integer
+                    enum:
+                      - ClientConnectionError:
+                        value: 1
+                      - ServerError:
+                        value: 2
+                  errorMessage:
+                    description: Detailed error message. Different messages can be used for same error code.
+                    type: string
+                    example: string
